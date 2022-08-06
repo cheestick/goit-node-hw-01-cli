@@ -1,22 +1,22 @@
 const contactsApi = require('./contacts')
 const argv = require('yargs').argv
 
-function invokeAction({ action, id, name, email, phone }) {
+async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-      contactsApi.listContacts()
+      console.table(await contactsApi.listContacts())
       break
 
     case 'get':
-      contactsApi.getContactById(id)
+      console.table(await contactsApi.getContactById(id))
       break
 
     case 'add':
-      contactsApi.addContact(name, email, phone)
+      console.table(await contactsApi.addContact(name, email, phone))
       break
 
     case 'remove':
-      contactsApi.removeContact(id)
+      console.table(await contactsApi.removeContact(id))
       break
 
     default:
