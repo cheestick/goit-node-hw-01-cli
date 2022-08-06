@@ -4,8 +4,7 @@ const path = require('path')
 const contactsPath = path.join(__dirname, 'db', 'contacts.json')
 
 async function listContacts() {
-  const fileData = await fs.readFile(contactsPath)
-  return JSON.parse(fileData)
+  return JSON.parse(await fs.readFile(contactsPath))
 }
 
 async function getContactById(contactId) {

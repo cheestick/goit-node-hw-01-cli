@@ -1,22 +1,38 @@
-const contactsApi = require('./contacts')
+const {
+  listContacts,
+  getContactById,
+  addContact,
+  removeContact,
+} = require('./contacts')
+
 const argv = require('yargs').argv
+
+function errorBoundary(operation) {
+  return async function (...args) {
+    try {
+      return await operation(...args)
+    } catch ({ message }) {
+      console.error({ error: message })
+    }
+  }
+}
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-      console.table(await contactsApi.listContacts())
+      console.table(await errorBoundary(listContacts)())
       break
 
     case 'get':
-      console.table(await contactsApi.getContactById(id))
+      console.table(await errorBoundary(getContactById)(id))
       break
 
     case 'add':
-      console.table(await contactsApi.addContact(name, email, phone))
+      console.table(await errorBoundary(addContact)(name, email, phone))
       break
 
     case 'remove':
-      console.table(await contactsApi.removeContact(id))
+      console.table(await errorBoundary(removeContact)(id))
       break
 
     default:
