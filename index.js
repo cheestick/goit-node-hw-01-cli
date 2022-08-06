@@ -2,6 +2,7 @@ const contactsApi = require('./contacts')
 const argv = require('yargs').argv
 
 contactsApi.listContacts()
+contactsApi.getContactById(1)
 
 // TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
@@ -27,4 +28,4 @@ function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-invokeAction(argv)
+// invokeAction(argv)
