@@ -3,20 +3,12 @@ const path = require('path')
 
 const contactsPath = path.join(__dirname, 'db', 'contacts.json')
 
-/*
- * Раскомментируй и запиши значение
- * const contactsPath = ;
- */
-
-// TODO: задокументировать каждую функцию
 async function listContacts() {
-  // ...твой код
   const fileData = await fs.readFile(contactsPath)
   return JSON.parse(fileData)
 }
 
 async function getContactById(contactId) {
-  // ...твой код
   if (!contactId) {
     console.log('Contact ID was undeclared')
     return
@@ -33,7 +25,6 @@ async function getContactById(contactId) {
 }
 
 async function removeContact(contactId) {
-  // ...твой код
   if (!contactId) {
     console.log('Contact ID was undeclared')
     return
@@ -52,7 +43,6 @@ async function removeContact(contactId) {
 }
 
 async function addContact(name, email, phone) {
-  // ...твой код
   if (!name || !email || !phone) {
     return console.log('Please type name, email and phone!')
   }
