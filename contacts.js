@@ -8,43 +8,36 @@ async function listContacts() {
 }
 
 async function getContactById(contactId) {
-  if (!contactId) {
-    console.log('Contact ID was undeclared')
-    return
-  }
+  contactId = String(contactId)
+  if (!contactId) throw new Error('Undeclared contact ID')
 
   const contactsList = await listContacts()
-  const contact = contactsList.find(({ id }) => String(contactId) === id)
-  if (!contact) {
-    console.log(`Contact with id ${contactId} was not found`)
-    return
-  }
+  const contact = contactsList.find(({ id }) => contactId === id)
+
+  if (!contact) throw new Error(`Contact with id ${contactId} was not found`)
 
   return contact
 }
 
 async function removeContact(contactId) {
-  if (!contactId) {
-    console.log('Contact ID was undeclared')
-    return
-  }
+  contactId = String(contactId)
+  if (!contactId) throw new Error('Undeclared contact ID')
 
   const contactsList = await listContacts()
-  const idx = contactsList.findIndex(({ id }) => String(contactId) === id)
-  if (idx === -1) {
-    console.log(`Contact with id ${contactId} was not found`)
-    return -1
-  }
+  const idx = contactsList.findIndex(({ id }) => contactId === id)
+  if (idx === -1) throw new Error(`Contact with id ${contactId} was not found`)
 
   const [deletedContact] = contactsList.splice(idx, 1)
+
   await updateContactsList(contactsList)
+
   return deletedContact
 }
 
 async function addContact(name, email, phone) {
-  if (!name || !email || !phone) {
-    return console.log('Please type name, email and phone!')
-  }
+  if (!name || !email || !phone)
+    throw new Error('Please type name, email and phone!')
+
   const contactsList = await listContacts()
   const newContact = {
     id: generateId(contactsList),
