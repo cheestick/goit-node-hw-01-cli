@@ -17,6 +17,10 @@ async function listContacts() {
 
 async function getContactById(contactId) {
   // ...твой код
+  if (!contactId) {
+    console.log('Contact ID was undeclared')
+    return
+  }
   const contactsList = await listContacts()
   const contact = contactsList.find(({ id }) => String(contactId) === id)
   if (!contact) {
