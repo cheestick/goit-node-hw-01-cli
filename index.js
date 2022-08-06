@@ -1,28 +1,22 @@
 const contactsApi = require('./contacts')
 const argv = require('yargs').argv
 
-// contactsApi.listContacts()
-// contactsApi.getContactById(1)
-// contactsApi.removeContact(13)
-// contactsApi.addContact('Maksym', 'maksym@m.com', '342-213-2344')
-
-// TODO: рефакторить
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-      // ...
+      contactsApi.listContacts()
       break
 
     case 'get':
-      // ... id
+      contactsApi.getContactById(id)
       break
 
     case 'add':
-      // ... name email phone
+      contactsApi.addContact(name, email, phone)
       break
 
     case 'remove':
-      // ... id
+      contactsApi.removeContact(id)
       break
 
     default:
@@ -30,4 +24,4 @@ function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-// invokeAction(argv)
+invokeAction(argv)
