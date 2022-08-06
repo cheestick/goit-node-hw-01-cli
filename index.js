@@ -17,16 +17,7 @@ function errorBoundary(operation) {
   }
 }
 
-function validateUserData(name, email, phone) {
-  const error = Object.create(null)
-  if (typeof name !== 'string') error.name = 'Name must be a string'
-  if (typeof email !== 'string') error.email = 'Email must be a string'
-  if (typeof phone !== 'string') error.phone = 'Phone must be a string'
-  // if (Object.entries(error).length) throw new Error({ error })
-}
-
 async function invokeAction({ action, id, name, email, phone }) {
-  validateUserData(name, email, phone)
   switch (action) {
     case 'list':
       console.table(await errorBoundary(listContacts)())

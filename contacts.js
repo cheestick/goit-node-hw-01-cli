@@ -35,8 +35,7 @@ async function removeContact(contactId) {
 }
 
 async function addContact(name, email, phone) {
-  if (!name || !email || !phone)
-    throw new Error('Please type name, email and phone!')
+  validateUserData(name, email, phone)
 
   const contactsList = await listContacts()
   const newContact = {
@@ -57,6 +56,19 @@ async function updateContactsList(updatedContactsList) {
 
 function generateId(contactsList) {
   return String(Number(contactsList[contactsList.length - 1].id) + 1)
+}
+
+function validateUserData(name, email, phone) {
+  if (!name || !email || !phone)
+    throw new Error('name, email and phone is required!')
+
+  const error = Object.create(null)
+  if (typeof name !== 'string') error.name = name
+  if (typeof email !== 'string') error.email = email
+  if (typeof phone !== 'string') error.phone = phone
+
+  if (Object.entries(error).length)
+    throw new Error(`${Object.keys(error).join(', ')} must be a string`)
 }
 
 module.exports = {
