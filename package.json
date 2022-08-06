@@ -1,0 +1,26 @@
+{
+  "name": "goit-node-hw-01-cli",
+  "version": "1.0.0",
+  "description": "node cli practice",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "keywords": [
+    "javascript",
+    "js",
+    "node",
+    "nodejs",
+    "cli"
+  ],
+  "author": "Maksym Chystiakov",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "commander": "^9.4.0",
+    "yargs": "^17.5.1"
+  }
+}
