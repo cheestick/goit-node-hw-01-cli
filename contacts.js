@@ -1,5 +1,6 @@
 const fs = require('fs/promises')
 const path = require('path')
+const { v4: generateId } = require('uuid')
 
 const contactsPath = path.join(__dirname, 'db', 'contacts.json')
 
@@ -39,7 +40,7 @@ async function addContact(name, email, phone) {
 
   const contactsList = await listContacts()
   const newContact = {
-    id: generateId(contactsList),
+    id: generateId(),
     name,
     email,
     phone,
@@ -52,10 +53,6 @@ async function addContact(name, email, phone) {
 
 async function updateContactsList(updatedContactsList) {
   await fs.writeFile(contactsPath, JSON.stringify(updatedContactsList, null, 2))
-}
-
-function generateId(contactsList) {
-  return String(Number(contactsList[contactsList.length - 1].id) + 1)
 }
 
 function validateUserData(name, email, phone) {
